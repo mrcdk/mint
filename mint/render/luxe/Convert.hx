@@ -26,8 +26,15 @@ class Convert {
     public static function bounds( _control:Control, ?_scale:Float=1.0 ) : Rectangle {
 
         if(_control == null) return null;
-
-        return new Rectangle(_control.x*_scale, _control.y*_scale, _control.w*_scale, _control.h*_scale);
+				//var r = new Rectangle(_control.x * _scale, _control.y * _scale, _control.w * _scale, _control.h * _scale);
+				var r = new Rectangle();
+				var p1 = Luxe.camera.view.world_point_to_screen(new Vector(_control.x * _scale, _control.y * _scale));
+				var p2 = Luxe.camera.view.world_point_to_screen(new Vector(_control.w * _scale, _control.h * _scale));
+				r.x = p1.x;
+				r.y = p1.y;
+				r.w = p2.x;
+				r.h = p2.y;
+        return r;
 
     } //bounds
 
